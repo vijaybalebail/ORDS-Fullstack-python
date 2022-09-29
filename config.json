@@ -1,0 +1,12 @@
+{
+  "ClientId" : "75ad7bca27ea4eeb8135b1f7d488f53b",
+  "ClientSecret" : "a2a67c7c-fe6c-4289-99f3-670d1d30275f",
+  "BaseUrl" : "https://idcs-270644901bf04406ae7180bd3d995ce6.identity.oraclecloud.com",
+  "AudienceServiceUrl" : "https://idcs-270644901bf04406ae7180bd3d995ce6.identity.oraclecloud.com",
+  "scope" : "urn:opc:idm:t.user.me openid",
+  "TokenIssuer" : "https://identity.oraclecloud.com/",
+  "redirectURL": "http://192.18.131.222:8080/home",
+  "logoutSufix":"/oauth2/v1/userlogout",
+  "LogLevel":"INFO",
+  "ConsoleLog":"True"
+}

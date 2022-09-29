@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> Retairement Calculator</title>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+</head>
+
+<body>
+
+  <center>
+       <div style="margin-top: 50px;" class="ui container">
+        <h1 class="ui center aligned header">{{ title }}</h1>
+
+        <form class="ui form" action="restapi" method="POST">
+            <div class="field">
+                <label>Enter you AGE</label>
+                <input type="text" name="age1" placeholder="Enter your age..."><br>
+                <label>Enter you current balance</label>
+                <input type="text" name="balance" placeholder="Enter your balance..."><br>
+                <label>Enter estimated annul return <label>
+                <input type="text" name="rate" placeholder="Enter rate of return.."><br>
+            </div>
+            <button class="ui blue button" type="submit">Submit</button>
+            <a class="ui red button" href="/logout">logout</a>
+        </form>
+
+        <hr>
+
+  </center>
+
+
+  <center>
+    <canvas id="chart" width="600" height="400"></canvas>
+    <script>
+      // bar chart data
+      var barData = {
+        labels : [
+          {% for item in labels %}
+           "{{ item }}",
+          {% endfor %}
+	],
+
+        datasets : [{
+          fillColor: "rgba(151,187,205,0.2)",
+          strokeColor: "rgba(151,187,205,1)",
+          pointColor: "rgba(151,187,205,1)",
+          data : [
+            {% for item in values %}
+               "{{ item }}",
+              {% endfor %}
+	    ]
+          }
+        ]
+      }
+
+     // get bar chart canvas
+     var mychart = document.getElementById("chart").getContext("2d");
+
+       steps = 10
+       max = {{max}}
+       min = {{min}}
+
+     // draw bar chart
+     new Chart(mychart).Bar(barData, {
+       scaleOverride: true,
+       scaleSteps: steps,
+       scaleStepWidth: Math.ceil(max / steps),
+       scaleStartValue: min,
+       scaleShowVerticalLines: true,
+       scaleShowGridLines : true,
+       barShowStroke : true,
+       scaleShowLabels: true
+       }
+     );
+
+    </script>
+  </center>
+</body>
+</html>
